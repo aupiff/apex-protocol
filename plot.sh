@@ -12,6 +12,7 @@ gnuplot <<- EOF
   set key outside
   set datafile separator ","
   set title font ",22"
+  set key font ",21"
   set title "Beta: $beta **** Steps: $steps **** Sum of Squared Pnls Scaled: $sq_pnl ****  Total PnL: $pnl"
 
   plot '${output}' using 0:2 with lines title "Oracle Price", '' using 0:3 with lines title "Pool Price",\
