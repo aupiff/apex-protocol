@@ -75,8 +75,8 @@ contract Amm is IAmm, LiquidityERC20, Reentrant {
             uint256 liquidity
         )
     {
-        // only router can add liquidity 
-        require(IConfig(config).routerMap(msg.sender), "Amm.mint: FORBIDDEN");
+        // only router can add liquidity
+        // require(IConfig(config).routerMap(msg.sender), "Amm.mint: FORBIDDEN");
 
         (uint112 _baseReserve, uint112 _quoteReserve, ) = getReserves(); // gas savings
 
@@ -136,8 +136,8 @@ contract Amm is IAmm, LiquidityERC20, Reentrant {
             uint256 liquidity
         )
     {
-        // only router can burn liquidity 
-        require(IConfig(config).routerMap(msg.sender), "Amm.mint: FORBIDDEN");
+        // only router can burn liquidity
+        // require(IConfig(config).routerMap(msg.sender), "Amm.burn: FORBIDDEN");
         (uint112 _baseReserve, uint112 _quoteReserve, ) = getReserves(); // gas savings
         liquidity = balanceOf[address(this)];
 
@@ -206,7 +206,7 @@ contract Amm is IAmm, LiquidityERC20, Reentrant {
             //short  （-， +）
             result = estimateSwap(quoteToken, baseToken, quoteTokenOfNetPosition.abs(), 0);
             baseTokenOfNetPosition = result[1];
-            
+
             realBaseReserve = uint256(_baseReserve) - baseTokenOfNetPosition;
         }
     }
@@ -293,7 +293,7 @@ contract Amm is IAmm, LiquidityERC20, Reentrant {
         );
 
         quoteReserveAfter = (_quoteReserve * quoteReserveFromExternal) / quoteReserveFromInternal;
-        
+
         rebaseTimestampLast = uint32(block.timestamp % 2**32);
         _update(_baseReserve, quoteReserveAfter, _baseReserve, _quoteReserve, true);
         if (feeOn) kLast = uint256(baseReserve) * quoteReserve;
